@@ -7,6 +7,7 @@
     <string name="titik">•</string>
     <string name="following">following</string>
     <string name="repository">repository</string>
+    <string name="share">Share</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
