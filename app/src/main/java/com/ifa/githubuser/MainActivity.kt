@@ -3,7 +3,6 @@ package com.ifa.githubuser
 import android.content.Intent
 import android.content.res.TypedArray
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,20 +26,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         rvUser = findViewById(R.id.rv_user)
         rvUser.setHasFixedSize(true)
-
         showRecycleList()
-
     }
-
-    private fun createRecycleDividerLine() {
-        val divider: RecyclerView.ItemDecoration =
-            DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        rvUser.addItemDecoration(divider)
-    }
-
     private fun showRecycleList() {
         createRecycleDividerLine()
         addItem()
@@ -53,6 +42,12 @@ class MainActivity : AppCompatActivity() {
                 showSelected(data)
             }
         })
+    }
+
+    private fun createRecycleDividerLine() {
+        val divider: RecyclerView.ItemDecoration =
+            DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        rvUser.addItemDecoration(divider)
     }
 
     private fun addItem(){
@@ -84,7 +79,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showSelected(user: User){
-        Toast.makeText(this, user.name, Toast.LENGTH_SHORT).show()
         val moveToUserDetail = Intent(this, UserDetailActivity::class.java)
         moveToUserDetail.putExtra(UserDetailActivity.USER_DETAIL, user)
         startActivity(moveToUserDetail)

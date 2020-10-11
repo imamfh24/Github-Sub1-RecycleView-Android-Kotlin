@@ -20,16 +20,16 @@ class UserDetailActivity : AppCompatActivity() {
         const val USER_DETAIL = "user_detail"
     }
 
-    lateinit var tvUserDetailName: TextView
-    lateinit var tvUserDetailUsername: TextView
-    lateinit var tvUserDetailFollowers: TextView
-    lateinit var tvUserDetailFollowing: TextView
-    lateinit var tvUserDetailLocation: TextView
-    lateinit var tvUserDetailCompany: TextView
-    lateinit var tvUserDetailRepository: TextView
-    lateinit var imgUserDetailAvatar: ImageView
+    private lateinit var tvUserDetailName: TextView
+    private lateinit var tvUserDetailUsername: TextView
+    private lateinit var tvUserDetailFollowers: TextView
+    private lateinit var tvUserDetailFollowing: TextView
+    private lateinit var tvUserDetailLocation: TextView
+    private lateinit var tvUserDetailCompany: TextView
+    private lateinit var tvUserDetailRepository: TextView
+    private lateinit var imgUserDetailAvatar: ImageView
 
-    lateinit var userDetail: User
+    private lateinit var userDetail: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
