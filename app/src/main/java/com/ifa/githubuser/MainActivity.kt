@@ -1,5 +1,6 @@
 package com.ifa.githubuser
 
+import android.content.Intent
 import android.content.res.TypedArray
 import android.os.Bundle
 import android.widget.Toast
@@ -84,5 +85,8 @@ class MainActivity : AppCompatActivity() {
 
     fun showSelected(user: User){
         Toast.makeText(this, user.name, Toast.LENGTH_SHORT).show()
+        val moveToUserDetail = Intent(this, UserDetailActivity::class.java)
+        moveToUserDetail.putExtra(UserDetailActivity.USER_DETAIL, user)
+        startActivity(moveToUserDetail)
     }
 }

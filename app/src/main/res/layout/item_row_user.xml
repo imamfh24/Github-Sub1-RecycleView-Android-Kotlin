@@ -5,13 +5,15 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    android:padding="16dp"
+    android:paddingHorizontal="@dimen/activity_padding"
+    android:paddingVertical="8dp"
     android:focusable="true">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_photo"
         android:layout_width="90dp"
         android:layout_height="90dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
         app:civ_border_width="2dp"
         app:civ_border_color="#FF909090" />
 
@@ -19,8 +21,8 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
         android:layout_toEndOf="@+id/img_photo"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="@string/name_users"
         android:textSize="18sp"
         android:textStyle="bold"/>
@@ -30,8 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_name"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_toEndOf="@id/img_photo"
         android:ellipsize="end"
         android:maxLines="3"

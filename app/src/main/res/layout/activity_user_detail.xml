@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".UserDetailActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_userImage_detail"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        app:cardCornerRadius="16dp">
+
+        <ImageView
+            android:id="@+id/img_user_detail_avatar"
+            android:background="@drawable/user1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_user_detail_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/cv_userImage_detail"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        tools:text="Phoenix Wright"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/tv_user_detail_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/cv_userImage_detail"
+        android:layout_below="@+id/tv_user_detail_name"
+        tools:text="Phoenix"
+        android:textSize="12sp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/cv_userImage_detail"
+        android:layout_below="@id/tv_user_detail_username"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginEnd="4dp"-->
+<!--            android:src="@drawable/ic_baseline_person_24" />-->
+
+        <TextView
+            android:id="@+id/tv_user_detail_followers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="999"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/followers"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/titik"
+            android:layout_marginHorizontal="4dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/tv_user_detail_following"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="999"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/following"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cv_userImage_detail"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_baseline_place_24" />
+
+            <TextView
+                android:id="@+id/tv_user_detail_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Indonesia"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_baseline_work_24" />
+
+            <TextView
+                android:id="@+id/tv_user_detail_company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Google. Inc"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_baseline_book_24" />
+
+            <TextView
+                android:id="@+id/tv_user_detail_repository"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="999"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/repository"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

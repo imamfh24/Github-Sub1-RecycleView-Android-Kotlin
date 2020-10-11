@@ -3,6 +3,10 @@
 
     <string name="name_users">Nama User</string>
     <string name="lorem">lorem ipsum dolor sit amet</string>
+    <string name="followers">followers</string>
+    <string name="titik">•</string>
+    <string name="following">following</string>
+    <string name="repository">repository</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
