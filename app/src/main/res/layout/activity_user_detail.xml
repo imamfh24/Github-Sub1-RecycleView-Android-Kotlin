@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".UserDetailActivity">
+    tools:context=".ui.view.UserDetailActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_userImage_detail"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        app:cardCornerRadius="16dp">
+        app:cardCornerRadius="50dp">
 
         <ImageView
             android:id="@+id/img_user_detail_avatar"
@@ -23,7 +23,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tv_user_detail_name"
+        android:id="@+id/tvSearchUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/cv_userImage_detail"
@@ -34,20 +34,19 @@
         android:textColor="@android:color/black"/>
 
     <TextView
-        android:id="@+id/tv_user_detail_username"
+        android:id="@+id/tvSearchNameUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/cv_userImage_detail"
-        android:layout_below="@+id/tv_user_detail_name"
+        android:layout_below="@+id/tvSearchUsername"
         tools:text="Phoenix"
         android:textSize="12sp"/>
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/cv_userImage_detail"
-        android:layout_below="@id/tv_user_detail_username"
+        android:layout_below="@id/tvSearchNameUser"
         android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
@@ -58,7 +57,7 @@
 <!--            android:src="@drawable/ic_baseline_person_24" />-->
 
         <TextView
-            android:id="@+id/tv_user_detail_followers"
+            android:id="@+id/tvSearchUserFollowers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="999"
@@ -74,13 +73,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/titik"
+            android:text="@string/point"
             android:layout_marginHorizontal="4dp"
             android:textStyle="bold"
             android:textColor="@android:color/black"/>
 
         <TextView
-            android:id="@+id/tv_user_detail_following"
+            android:id="@+id/tvSearchUserFollowing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="999"

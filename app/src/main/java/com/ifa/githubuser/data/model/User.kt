@@ -1,4 +1,4 @@
-package com.ifa.githubuser
+package com.ifa.githubuser.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

@@ -1,4 +1,4 @@
-package com.ifa.githubuser
+package com.ifa.githubuser.ui.view
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -11,6 +11,8 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.ifa.githubuser.R
+import com.ifa.githubuser.data.model.User
 import java.io.File
 import java.io.FileOutputStream
 
@@ -43,16 +45,16 @@ class UserDetailActivity : AppCompatActivity() {
         imgUserDetailAvatar = findViewById(R.id.img_user_detail_avatar)
         userDetail.avatar?.let { imgUserDetailAvatar.setImageResource(it) }
 
-        tvUserDetailName = findViewById(R.id.tv_user_detail_name)
+        tvUserDetailName = findViewById(R.id.tvSearchUsername)
         tvUserDetailName.text = userDetail.name
 
-        tvUserDetailUsername = findViewById(R.id.tv_user_detail_username)
+        tvUserDetailUsername = findViewById(R.id.tvSearchNameUser)
         tvUserDetailUsername.text = userDetail.username
 
-        tvUserDetailFollowers = findViewById(R.id.tv_user_detail_followers)
+        tvUserDetailFollowers = findViewById(R.id.tvSearchUserFollowers)
         tvUserDetailFollowers.text = userDetail.followers
 
-        tvUserDetailFollowing = findViewById(R.id.tv_user_detail_following)
+        tvUserDetailFollowing = findViewById(R.id.tvSearchUserFollowing)
         tvUserDetailFollowing.text = userDetail.following
 
         tvUserDetailLocation = findViewById(R.id.tv_user_detail_location)
