@@ -1,5 +1,6 @@
 package com.ifa.githubuser.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,18 +10,27 @@ import com.bumptech.glide.request.RequestOptions
 import com.ifa.githubuser.ItemClickListener
 import com.ifa.githubuser.R
 import com.ifa.githubuser.data.model.ItemsItem
+import com.ifa.githubuser.data.model.UserDetail
 import com.ifa.githubuser.databinding.ItemRowUserBinding
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     private val mUserSearchData = ArrayList<ItemsItem>()
+    private val mUserDetail = ArrayList<UserDetail>()
 
     private lateinit var itemClickListener: ItemClickListener
 
-    fun searchDataUser(dataUser: ArrayList<ItemsItem>){
+    fun searchDataUser(dataUser: ArrayList<ItemsItem>, userDetailData: ArrayList<UserDetail>){
         mUserSearchData.clear()
+        mUserDetail.clear()
         mUserSearchData.addAll(dataUser)
-        notifyDataSetChanged()
+        Log.d("mUserSearchData ", "" + mUserSearchData.size.toString())
+        mUserDetail.addAll(userDetailData)
+        Log.d("mUserDetail ", "" + mUserDetail.size.toString())
+
+        if (mUserSearchData.size == mUserDetail.size){
+            notifyDataSetChanged()
+        }
     }
 
     fun setItemClickListener(itemClickListener: ItemClickListener) {
@@ -33,7 +43,9 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Log.d("mUserPosition:", "" + position)
         holder.bind(mUserSearchData[position])
+        holder.bindDetail(mUserDetail[position])
         /*holder.itemView.setOnClickListener{
             itemClickListener.onItemClick(users[holder.adapterPosition])
         }*/
@@ -47,7 +59,6 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
         fun bind (userItems: ItemsItem){
             with(itemView){
                 binding.tvSearchUsername.text = userItems.login
-
                 /*val userCall: Call<UserDetail?> = RetrofitBuilder.apiService.getUsers(userItems.login!!)
                 userCall.enqueue(object : Callback<UserDetail?>{
                     override fun onResponse(
@@ -75,6 +86,12 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
                     .into(binding.imgSearchPhotoUser)
             }
         }
-
+        fun bindDetail(userDetail: UserDetail) {
+            with(itemView){
+                binding.tvSearchNameUser.text = userDetail.name
+                binding.tvSearchUserFollowers.text = userDetail.followers.toString()
+                binding.tvSearchUserFollowing.text = userDetail.following.toString()
+            }
+        }
     }
 }

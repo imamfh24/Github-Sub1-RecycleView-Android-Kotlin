@@ -32,6 +32,7 @@
                 </androidx.appcompat.widget.Toolbar>
 
                 <ImageView
+                    android:id="@+id/menu_localization"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -51,6 +52,7 @@
                 android:layout_marginBottom="@dimen/activity_vertical_margin">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_searchView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:endIconMode="clear_text"
@@ -89,9 +91,16 @@
             android:visibility="gone"
             />
 
-        <include layout="@layout/item_user_not_found"/>
+        <include android:visibility="gone"
+            android:id="@+id/layout_user_not_found"
+            layout="@layout/item_user_not_found"/>
+
+        <include android:visibility="gone"
+            android:id="@+id/layout_no_data"
+            layout="@layout/item_no_data"/>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
             android:id="@+id/rv_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

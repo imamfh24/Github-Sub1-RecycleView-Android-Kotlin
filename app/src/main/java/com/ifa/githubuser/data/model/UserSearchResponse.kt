@@ -20,6 +20,9 @@ data class UserSearchResponse(
 @Parcelize
 data class ItemsItem(
 
+	@field:SerializedName("login")
+	val login: String? = null,
+
 	@field:SerializedName("gists_url")
 	val gistsUrl: String? = null,
 
@@ -31,9 +34,6 @@ data class ItemsItem(
 
 	@field:SerializedName("starred_url")
 	val starredUrl: String? = null,
-
-	@field:SerializedName("login")
-	val login: String? = null,
 
 	@field:SerializedName("followers_url")
 	val followersUrl: String? = null,

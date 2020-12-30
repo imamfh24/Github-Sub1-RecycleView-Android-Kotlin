@@ -9,10 +9,11 @@
     <string name="repository">repository</string>
     <string name="share">Share</string>
     <string name="imam_faried_helmi_n2020">©Imam Faried Helmi\n2020</string>
-    <string name="find_user_github_here">Find Github User Here</string>
+    <string name="find_user_github_here">Find Github Username Here</string>
 
     <string name="welcome_app">Welcome to Github User App</string>
     <string name="user_not_found">User not Found</string>
+    <string name="no_data">No Data</string>
 
 
 </resources>

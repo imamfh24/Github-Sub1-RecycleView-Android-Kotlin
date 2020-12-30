@@ -14,5 +14,6 @@
 
     <string name="welcome_app">Selamat datang di Aplikasi Github User </string>
     <string name="user_not_found">Pengguna tidak ditemukan</string>
+    <string name="no_data">Tidak ada Data</string>
 
 </resources>
