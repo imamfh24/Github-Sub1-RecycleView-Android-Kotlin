@@ -46,9 +46,9 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
         Log.d("mUserPosition:", "" + position)
         holder.bind(mUserSearchData[position])
         holder.bindDetail(mUserDetail[position])
-        /*holder.itemView.setOnClickListener{
-            itemClickListener.onItemClick(users[holder.adapterPosition])
-        }*/
+        holder.itemView.setOnClickListener{
+            itemClickListener.onItemClick(mUserDetail[position])
+        }
     }
 
     override fun getItemCount(): Int = mUserSearchData.size

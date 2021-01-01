@@ -1,7 +1,7 @@
 package com.ifa.githubuser
 
-import com.ifa.githubuser.data.model.User
+import com.ifa.githubuser.data.model.UserDetail
 
 interface ItemClickListener {
-    fun onItemClick(data: User)
+    fun onItemClick(data: UserDetail)
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Github User</string>
+    <string name="app_name">Aplikasi Github User</string>
 
     <string name="user_name">Nama User</string>
     <string name="lorem">lorem ipsum dolor sit amet</string>
@@ -15,5 +15,11 @@
     <string name="welcome_app">Selamat datang di Aplikasi Github User </string>
     <string name="user_not_found">Pengguna tidak ditemukan</string>
     <string name="no_data">Tidak ada Data</string>
+    <string name="user_detail">Detail Pengguna</string>
+
+    <string name="share_from">Dibagikan dari Aplikasi Github User</string>
+    <string name="name">Nama</string>
+    <string name="from">Dari</string>
+
 
 </resources>

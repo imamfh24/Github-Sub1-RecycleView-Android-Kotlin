@@ -1,20 +1,16 @@
 package com.ifa.githubuser.ui.view
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
 import android.os.Bundle
-import android.os.StrictMode
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.ifa.githubuser.R
-import com.ifa.githubuser.data.model.User
-import java.io.File
-import java.io.FileOutputStream
+import com.ifa.githubuser.data.model.UserDetail
+import com.ifa.githubuser.databinding.ActivityUserDetailBinding
+
 
 class UserDetailActivity : AppCompatActivity() {
 
@@ -22,52 +18,36 @@ class UserDetailActivity : AppCompatActivity() {
         const val USER_DETAIL = "user_detail"
     }
 
-    private lateinit var tvUserDetailName: TextView
-    private lateinit var tvUserDetailUsername: TextView
-    private lateinit var tvUserDetailFollowers: TextView
-    private lateinit var tvUserDetailFollowing: TextView
-    private lateinit var tvUserDetailLocation: TextView
-    private lateinit var tvUserDetailCompany: TextView
-    private lateinit var tvUserDetailRepository: TextView
-    private lateinit var imgUserDetailAvatar: ImageView
+    private lateinit var binding: ActivityUserDetailBinding
 
-    private lateinit var userDetail: User
+    private lateinit var userDetail: UserDetail
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_detail)
+        binding = ActivityUserDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setView()
     }
 
     private fun setView() {
-        userDetail = intent.getParcelableExtra(USER_DETAIL) as User
-        imgUserDetailAvatar = findViewById(R.id.img_user_detail_avatar)
-        userDetail.avatar?.let { imgUserDetailAvatar.setImageResource(it) }
+        setSupportActionBar(binding.userDetailActivityToolbar.toolbar)
+        userDetail = intent.getParcelableExtra(USER_DETAIL) as UserDetail
+        Glide.with(this)
+            .load(userDetail.avatarUrl)
+            .apply(RequestOptions())
+            .into(binding.imgUserDetailAvatar)
 
-        tvUserDetailName = findViewById(R.id.tvSearchUsername)
-        tvUserDetailName.text = userDetail.name
-
-        tvUserDetailUsername = findViewById(R.id.tvSearchNameUser)
-        tvUserDetailUsername.text = userDetail.username
-
-        tvUserDetailFollowers = findViewById(R.id.tvSearchUserFollowers)
-        tvUserDetailFollowers.text = userDetail.followers
-
-        tvUserDetailFollowing = findViewById(R.id.tvSearchUserFollowing)
-        tvUserDetailFollowing.text = userDetail.following
-
-        tvUserDetailLocation = findViewById(R.id.tv_user_detail_location)
-        tvUserDetailLocation.text = userDetail.location
-
-        tvUserDetailCompany = findViewById(R.id.tv_user_detail_company)
-        tvUserDetailCompany.text = userDetail.company
-
-        tvUserDetailRepository = findViewById(R.id.tv_user_detail_repository)
-        tvUserDetailRepository.text = userDetail.repository
+        binding.tvUserDetailNameUser.text = userDetail.name
+        binding.tvUserDetailUsername.text = userDetail.login
+        binding.tvUserDetailFollowers.text = userDetail.followers.toString()
+        binding.tvUserDetailFollowing.text = userDetail.following.toString()
+        binding.tvUserDetailLocation.text = userDetail.location
+        binding.tvUserDetailCompany.text = userDetail.company
+        binding.tvUserDetailRepository.text = userDetail.publicRepos.toString()
 
         if (supportActionBar != null) {
-            supportActionBar!!.title = "Detail User"
+            supportActionBar!!.title = resources.getString(R.string.user_detail)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         }
     }
@@ -91,48 +71,24 @@ class UserDetailActivity : AppCompatActivity() {
         when(itemId){
             R.id.action_share_user_detail -> {
 
-                val drawable = imgUserDetailAvatar.drawable as BitmapDrawable
-                val drawableName = (tvUserDetailName.text.toString() + ".png")
-                val infoShare = "Hello There\n" +
-                        "Share from github user\n" +
-                        "Name: ${tvUserDetailName.text}\n" +
-                        "From : ${tvUserDetailLocation.text}\n"
+                val infoShare = "${userDetail.htmlUrl}\n" +
+                        "${resources.getString(R.string.share_from)}\n" +
+                        "${resources.getString(R.string.name)}: ${binding.tvUserDetailNameUser.text}\n" +
+                        "${resources.getString(R.string.from)}: ${binding.tvUserDetailLocation.text}"
 
-                createShareInfo(drawable, drawableName, infoShare)
+                createShareInfo(infoShare)
             }
         }
     }
 
-    private fun createShareInfo(
-        drawable: BitmapDrawable,
-        drawableName: String,
-        infoShare: String
-    ) {
-        val builder = StrictMode.VmPolicy.Builder()
-        StrictMode.setVmPolicy(builder.build())
-        val bitmap = drawable.bitmap
-
-        val f = File(externalCacheDir.toString() + "/" + drawableName)
+    private fun createShareInfo(infoShare: String) {
 
         val intent = Intent()
+        intent.action = Intent.ACTION_SEND
+        intent.putExtra(Intent.EXTRA_TEXT, infoShare)
+        intent.type = "text/plain"
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(Intent.createChooser(intent, resources.getString(R.string.share)))
 
-        try {
-            val fileOutputStream = FileOutputStream(f)
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
-
-            fileOutputStream.flush()
-            fileOutputStream.close()
-
-            intent.action = Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT, infoShare)
-            intent.type = "text/plain"
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f))
-            intent.type = "image/*"
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-        } catch (e: Exception) {
-
-        }
-        startActivity(Intent.createChooser(intent, "Share"))
     }
 }

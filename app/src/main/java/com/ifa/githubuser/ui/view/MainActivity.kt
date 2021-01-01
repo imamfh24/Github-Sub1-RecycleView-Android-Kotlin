@@ -11,6 +11,8 @@ import android.widget.TextView.OnEditorActionListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ifa.githubuser.ItemClickListener
+import com.ifa.githubuser.data.model.UserDetail
 import com.ifa.githubuser.databinding.ActivityMainBinding
 import com.ifa.githubuser.ui.adapter.UserAdapter
 import com.ifa.githubuser.ui.viewmodel.MainViewModel
@@ -26,26 +28,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        setSupportActionBar(binding.mainActivityToolbar)
         setupUI()
         setupViewModel()
         setupObserve()
     }
 
     private fun setupUI() {
+        //Toolbar
+        setSupportActionBar(binding.mainActivityToolbar)
+
+        //Adapter
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
+
+        //RecycleView
         binding.rvUser.layoutManager = LinearLayoutManager(this)
         binding.rvUser.setHasFixedSize(true)
         binding.rvUser.adapter = adapter
-        val menuLocalization = binding.menuLocalization
 
+        //Localization
+        val menuLocalization = binding.menuLocalization
         menuLocalization.setOnClickListener {
             val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
             startActivity(mIntent)
         }
 
+        //SearchView
         setupSearchView()
     }
 
@@ -106,6 +114,11 @@ class MainActivity : AppCompatActivity() {
                     if (detailUser != null && listUsers.size == detailUser.size){
                         showLoading(true)
                         adapter.searchDataUser(listUsers, detailUser)
+                        adapter.setItemClickListener(object : ItemClickListener{
+                            override fun onItemClick(data: UserDetail) {
+                                showSelectedData(data)
+                            }
+                        })
                         showLoading(false)
                     }
                 })
@@ -114,6 +127,12 @@ class MainActivity : AppCompatActivity() {
                 showLoading(false)
             }
         })
+    }
+
+    private fun showSelectedData(userDetail: UserDetail) {
+        val moveToUserDetail = Intent(this, UserDetailActivity::class.java)
+        moveToUserDetail.putExtra(UserDetailActivity.USER_DETAIL, userDetail)
+        startActivity(moveToUserDetail)
     }
 
     private fun showError(state: Boolean) {
