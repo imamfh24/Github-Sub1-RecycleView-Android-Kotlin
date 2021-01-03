@@ -1,11 +1,10 @@
 package com.ifa.githubuser.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ifa.githubuser.data.api.RetrofitBuilder
-import com.ifa.githubuser.data.model.ItemsItem
+import com.ifa.githubuser.data.model.User
 import com.ifa.githubuser.data.model.UserDetail
 import com.ifa.githubuser.data.model.UserSearchResponse
 import retrofit2.Call
@@ -13,15 +12,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel : ViewModel() {
-    val listUsers = MutableLiveData<ArrayList<ItemsItem>>()
+    val listUsers = MutableLiveData<ArrayList<User>>()
     val detailUsersLiveData = MutableLiveData<ArrayList<UserDetail>>()
 
-    fun getListUsers() : LiveData<ArrayList<ItemsItem>>{
+    fun getListUsers() : LiveData<ArrayList<User>>{
         return listUsers
     }
 
     fun setListUsers(userName: String){
-
         val searchCall: Call<UserSearchResponse?> = RetrofitBuilder.apiService.searchUser(userName)
 
         searchCall.enqueue(object : Callback<UserSearchResponse?> {
@@ -34,10 +32,7 @@ class MainViewModel : ViewModel() {
                         detailUsersLiveData.value = null
                         listUsers.value = null
                     } else {
-                        listUsers.value = response.body()!!.items as ArrayList<ItemsItem>
-
-                        //Log.d("listUsers ", listUsers.value.toString())
-
+                        listUsers.value = response.body()!!.items as ArrayList<User>
                         setDetailUsers(listUsers.value!!)
                     }
                 }
@@ -54,23 +49,20 @@ class MainViewModel : ViewModel() {
         return detailUsersLiveData
     }
 
-    fun setDetailUsers(listUsers: ArrayList<ItemsItem>){
-        Log.d("ListUsers: ", listUsers.toString())
+    fun setDetailUsers(listUsers: ArrayList<User>){
         val userDetail: ArrayList<UserDetail> = ArrayList()
-
         try {
-            for (i: ItemsItem in listUsers){
+            for (i: User in listUsers){
                 val userCall: Call<UserDetail?> = RetrofitBuilder.apiService.getUsers(i.login.toString())
-                Log.d("userPerItem", ""+ i.login.toString())
                 userCall.enqueue(object : Callback<UserDetail?> {
-                    override fun onResponse(call: Call<UserDetail?>, response: Response<UserDetail?>) {
+                    override fun onResponse(
+                        call: Call<UserDetail?>,
+                        response: Response<UserDetail?>
+                    ) {
                         if (response.isSuccessful && response.body() != null) {
-                            Log.d("userPerResponse: ",  " "+ i.login.toString()+ " " + response.body()!!.name)
                             userDetail.add(response.body()!!)
-                            Log.d("userDetail: ", "" + userDetail.toString())
-                            if (userDetail.size == listUsers.size){
+                            if (userDetail.size == listUsers.size) {
                                 detailUsersLiveData.value = userDetail
-//                                Log.d("userListDetail: ", "" + detailUsersLiveData.value.toString())
                             }
                         }
                     }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.view.UserDetailFollowersFragment">
+
+        <ProgressBar
+            android:id="@+id/progressBarFollow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyle"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            />
+
+        <include android:visibility="gone"
+            android:id="@+id/layout_no_data_follow"
+            layout="@layout/item_no_data"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvUserDetailFollow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_user_follow"
+            android:visibility="gone"
+            />
+
+</RelativeLayout>

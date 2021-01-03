@@ -5,6 +5,7 @@
     <string name="lorem">lorem ipsum dolor sit amet</string>
     <string name="followers">followers</string>
     <string name="point">•</string>
+    <string name="line">-</string>
     <string name="following">following</string>
     <string name="repository">repository</string>
     <string name="share">Share</string>
@@ -20,5 +21,7 @@
     <string name="name">Name</string>
     <string name="from">From</string>
 
+    <string name="no_followers">This user has no followers</string>
+    <string name="no_following">This user doesn\'t follow anyone</string>
 
 </resources>

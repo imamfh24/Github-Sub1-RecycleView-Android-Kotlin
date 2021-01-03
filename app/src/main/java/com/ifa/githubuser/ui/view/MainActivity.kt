@@ -12,9 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ifa.githubuser.ItemClickListener
+import com.ifa.githubuser.R
 import com.ifa.githubuser.data.model.UserDetail
 import com.ifa.githubuser.databinding.ActivityMainBinding
-import com.ifa.githubuser.ui.adapter.UserAdapter
+import com.ifa.githubuser.ui.adapter.UserSearchAdapter
 import com.ifa.githubuser.ui.viewmodel.MainViewModel
 
 
@@ -22,15 +23,18 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
-    private lateinit var adapter: UserAdapter
+    private lateinit var adapter: UserSearchAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         setupUI()
         setupViewModel()
         setupObserve()
+
     }
 
     private fun setupUI() {
@@ -38,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.mainActivityToolbar)
 
         //Adapter
-        adapter = UserAdapter()
+        adapter = UserSearchAdapter()
         adapter.notifyDataSetChanged()
 
         //RecycleView
@@ -60,7 +64,6 @@ class MainActivity : AppCompatActivity() {
     private fun setupSearchView() {
         //SearchView
         val searchView = binding.etSearchView
-        showLayoutData(true)
 
         searchView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -68,11 +71,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (count == 0) {
-                    showLoading(true)
-                    showLoading(false)
-                    showError(false)
-                    showLayoutData(true)
+                if (s != null) {
+                    if (s.isBlank()) {
+                        showLoading(true)
+                        showLoading(false)
+                        showError(false)
+                        showLayoutNoData(true)
+                    }
                 }
             }
 
@@ -84,14 +89,14 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val contents = binding.etSearchView.text.toString()
-                showLayoutData(false)
+                showLayoutNoData(false)
                 showError(false)
                 showLoading(true)
                 if (contents.isNotEmpty()){
                     mainViewModel.setListUsers(contents)
                 } else {
-                    showLayoutData(false)
                     showLoading(false)
+                    showLayoutNoData(false)
                     showError(true)
                 }
 
@@ -123,8 +128,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
             } else {
-                showError(true)
                 showLoading(false)
+                showError(true)
             }
         })
     }
@@ -138,25 +143,27 @@ class MainActivity : AppCompatActivity() {
     private fun showError(state: Boolean) {
         if (state){
             binding.layoutUserNotFound.layoutUserNotFound.visibility = View.VISIBLE
-            binding.rvUser.visibility = View.INVISIBLE
+            binding.rvUser.visibility = View.GONE
         } else {
             binding.layoutUserNotFound.layoutUserNotFound.visibility = View.GONE
         }
     }
 
-    private fun showLayoutData(state: Boolean) {
+    private fun showLayoutNoData(state: Boolean) {
         if (state){
+            binding.layoutNoData.tvItemNoData.text = resources.getString(R.string.no_data)
             binding.layoutNoData.layoutNoData.visibility = View.VISIBLE
-            binding.rvUser.visibility = View.INVISIBLE
+            binding.rvUser.visibility = View.GONE
         } else {
             binding.layoutNoData.layoutNoData.visibility = View.GONE
+            binding.layoutUserNotFound.layoutUserNotFound.visibility = View.GONE
         }
     }
 
     private fun showLoading(state: Boolean){
         if (state){
             binding.progressBar.visibility = View.VISIBLE
-            binding.rvUser.visibility = View.INVISIBLE
+            binding.rvUser.visibility = View.GONE
         } else {
             binding.progressBar.visibility = View.GONE
             binding.rvUser.visibility = View.VISIBLE

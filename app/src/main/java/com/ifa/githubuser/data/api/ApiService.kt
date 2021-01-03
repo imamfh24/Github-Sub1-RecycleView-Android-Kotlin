@@ -1,5 +1,6 @@
 package com.ifa.githubuser.data.api
 
+import com.ifa.githubuser.data.model.User
 import com.ifa.githubuser.data.model.UserDetail
 import com.ifa.githubuser.data.model.UserSearchResponse
 import retrofit2.Call
@@ -18,5 +19,13 @@ interface ApiService {
     @GET("users/{user}")
     @Headers("Authorization: token 3100c2a536a670dbc9742278de338e56db073d07")
     fun getUsers(@Path("user") user: String): Call<UserDetail?>
+
+    @GET("users/{user}/followers")
+    @Headers("Authorization: token 3100c2a536a670dbc9742278de338e56db073d07")
+    fun getFollowersUser(@Path("user") user: String): Call<List<User?>>
+
+    @GET("users/{user}/following")
+    @Headers("Authorization: token 3100c2a536a670dbc9742278de338e56db073d07")
+    fun getFollowingUser(@Path("user") user: String): Call<List<User?>>
 
 }

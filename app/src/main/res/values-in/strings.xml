@@ -6,6 +6,7 @@
     <string name="lorem">lorem ipsum dolor sit amet</string>
     <string name="followers">Pengikut</string>
     <string name="point">•</string>
+    <string name="line">-</string>
     <string name="following">Mengikuti</string>
     <string name="repository">repository</string>
     <string name="share">Bagikan</string>
@@ -20,6 +21,8 @@
     <string name="share_from">Dibagikan dari Aplikasi Github User</string>
     <string name="name">Nama</string>
     <string name="from">Dari</string>
+    <string name="no_followers">Pengguna ini tidak memiliki pengikut</string>
+    <string name="no_following">Pengguna ini tidak mengikuti siapapun</string>
 
 
 </resources>

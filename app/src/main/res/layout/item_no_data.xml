@@ -13,6 +13,7 @@
         android:src="@drawable/ic_baseline_warning_dark" />
 
     <TextView
+        android:id="@+id/tvItemNoData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/no_data"
